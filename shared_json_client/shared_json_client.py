@@ -21,6 +21,9 @@ class SharedJsonClient:
     def debug_notify(self,text_list:list):
         return self._json_rpc_client.request_notify('debug_notify',text_list)
 
+    def get_data_name_tree(self):
+        return self._json_rpc_client.request_method('get_data_name_tree',None)
+    
     def set_data(self,data_name:str,data:dict):
         return self._json_rpc_client.request_method('set_data',{
             'data_name':data_name,
@@ -40,6 +43,17 @@ class SharedJsonClient:
         })
     def read_data(self,data_name:str):
         return self._json_rpc_client.request_method('read_data',{
+            'data_name':data_name,
+            'lock_name':self.lock_name
+        })
+    def write_schema(self,data_name:str,schema:dict):
+        return self._json_rpc_client.request_method('write_schema',{
+            'data_name':data_name,
+            'schema':schema,
+            'lock_name':self.lock_name
+        })
+    def read_schema(self,data_name:str):
+        return self._json_rpc_client.request_method('read_schema',{
             'data_name':data_name,
             'lock_name':self.lock_name
         })
